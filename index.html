@@ -1,1 +1,147 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d1c">
+<title>VARCH AI</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;padding:20px;
+background:#080d1c;color:white;
+font-family:Arial,sans-serif;
+}
+header{display:flex;align-items:center;gap:12px}
+.logo{
+width:50px;height:50px;border-radius:15px;
+background:linear-gradient(135deg,#00d9ff,#7655ff);
+display:grid;place-items:center;
+font-size:27px;font-weight:bold;
+}
+h1{margin:0;font-size:26px}
+small{color:#9daac5}
+.card{
+background:#121c32;
+border:1px solid #273652;
+padding:18px;border-radius:18px;
+margin-top:20px;
+}
+.status{color:#42e6ac}
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+.feature{
+background:#192641;
+padding:20px 10px;
+border-radius:15px;
+text-align:center;
+}
+.feature b{display:block;margin-top:10px}
+input{
+width:100%;padding:14px;
+border-radius:12px;
+border:1px solid #344563;
+background:#0b1428;color:white;
+font-size:16px;
+}
+button{
+padding:14px;border:0;
+border-radius:12px;
+background:#655bff;color:white;
+font-weight:bold;
+}
+.chat{display:flex;gap:8px;margin-top:12px}
+#messages{max-height:250px;overflow:auto}
+.msg{
+padding:12px;background:#202e49;
+border-radius:10px;margin:8px 0;
+}
+footer{text-align:center;margin-top:25px;color:#7786a4}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">V</div>
+<div>
+<h1>VARCH AI</h1>
+<small>Your Smart AI Assistant</small>
+</div>
+</header>
+
+<section class="card">
+<h2>Welcome to VARCH AI 🚀</h2>
+<p>Your Personal AI Automation Assistant.</p>
+<p class="status">● System Ready</p>
+</section>
+
+<h2>AI Dashboard</h2>
+
+<div class="grid">
+<div class="feature">🤖<b>AI Assistant</b><small>Smart Chat</small></div>
+<div class="feature">🎙️<b>Voice AI</b><small>Voice Input</small></div>
+<div class="feature">⚙️<b>Automation</b><small>Coming Soon</small></div>
+<div class="feature">📊<b>Dashboard</b><small>Coming Soon</small></div>
+</div>
+
+<section class="card">
+<h2>💬 Chat with VARCH</h2>
+<div id="messages">
+<div class="msg">Hello! I am VARCH AI. How can I help you?</div>
+</div>
+
+<div class="chat">
+<input id="question" placeholder="Ask VARCH anything...">
+<button onclick="send()">Send</button>
+</div>
+
+<button onclick="voice()" style="width:100%;margin-top:12px">
+🎙️ Speak to VARCH
+</button>
+</section>
+
+<footer>VARCH AI © 2026</footer>
+
+<script>
+function send(){
+const input=document.getElementById("question");
+const value=input.value.trim();
+if(!value)return;
+
+const box=document.getElementById("messages");
+const msg=document.createElement("div");
+msg.className="msg";
+msg.textContent="You: "+value;
+box.appendChild(msg);
+
+const reply=document.createElement("div");
+reply.className="msg";
+reply.textContent="VARCH: Your message received! AI connection will be added soon.";
+box.appendChild(reply);
+
+input.value="";
+box.scrollTop=box.scrollHeight;
+}
+
+function voice(){
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(!SR){
+alert("Voice recognition is not supported in this browser.");
+return;
+}
+const recognition=new SR();
+recognition.lang="en-IN";
+recognition.onresult=function(e){
+document.getElementById("question").value=
+e.results[0][0].transcript;
+};
+recognition.start();
+}
+</script>
+
+</body>
+</html>
